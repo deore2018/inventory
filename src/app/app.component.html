@@ -1,0 +1,275 @@
+<!-- <label>State:</label>
+<select [(ngModel)]="selectedLevel" (change)="onSelect()">
+
+  <option value="0">--Select--</option>
+  <option *ngFor="let web of websiteList" [ngValue]="web">{{web.state}}</option>
+</select>
+<br />
+<br />
+
+<div>
+    <label>Divison:</label>
+    <select [(ngModel)]="selecteddivison" (change)="ondivison()">
+    <option value="0">--Select--</option>
+    <option *ngFor="let state of divisionlist " [ngValue]="state">{{state.division}}</option>
+  </select>
+</div>
+<br />
+<br />
+<div>
+    <label>District:</label>
+    <select [(ngModel)]="selectedDistrict" (change)="ondistrict()">
+    <option value="0">--Select--</option>
+    <option *ngFor="let district of districtlist " [ngValue]="district">{{district.district}}</option>
+  </select>
+</div>
+<br />
+<br />
+<div>
+    <label>Taluka: </label>
+    <select [(ngModel)]="selectedTaluka" (change)="ontaluka()">
+    <option value="0">--Select--</option>
+    <option *ngFor="let taluka of talukalist " [ngValue]="taluka">{{taluka.taluka}}</option>
+  </select>
+</div>
+<br />
+<br />
+<div>
+    <label>Village:</label>
+    <select [(ngModel)]="selectedvillage" [value]="villagename" (change)="onvillage()">
+    <option value="0">--Select--</option>
+    <option *ngFor="let village of villagelist " [ngValue]="village">{{village.name}}</option>
+  </select>
+</div>
+
+<br>
+<br>
+
+<button (click)="addCommitee()">Add Commitee</button>
+<br/>
+<br/>
+
+<table>
+    <tr>
+        <th>Sr.No</th>
+        <th>State</th>
+        <th>Divison</th>
+        <th>District</th>
+        <th>Taluka</th>
+        <th>Village</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+
+    <tr *ngFor="let item of result_array; let myIndex = index">
+        <td>
+            {{item.id}}
+        </td>
+        <td>
+            {{item.state}}
+        </td>
+        <td>
+            {{item.divison}}
+        </td>
+        <td>
+            {{item.district}}
+        </td>
+        <td>
+            {{item.taluka}}
+        </td>
+        <td>
+            {{item.village}}
+        </td>
+        <td>
+            <i class="fa fa-edit" style="cursor: pointer" (click)="onEdit(myIndex)"></i>
+        </td>
+        <td>
+            <i class="fa fa-trash" style="cursor: pointer;" (click)="onDelete(myIndex)"></i>
+        </td>
+    </tr>
+
+</table> -->
+
+<!-- <form [formGroup]="profileForm">
+
+    <label for="first-name">First Name: </label>
+    <input id="first-name" type="text" formControlName="firstName">
+
+    <label for="last-name">Last Name: </label>
+    <input id="last-name" type="text" formControlName="lastName">
+
+</form> -->
+
+<h1>Inventory System</h1>
+
+<form [formGroup]="inventoryForm">
+    <div class="col">
+        <div>
+            <label>
+        Supplier Name:
+        <input formControlName="Supplier" [(ngModel)]="Supplier" [ngClass]="{ 'ng-invalid ng-touched': inventoryFormControl.Supplier.errors && inventorySubmit }">
+      </label>
+
+            <div *ngIf="(inventoryFormControl.Supplier.touched || inventorySubmit)  && inventoryFormControl.Supplier.errors">
+                <div *ngIf="inventoryFormControl.Supplier.errors.required">
+                    <div class="invalid-alert"> Supplier Name Required
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <br>
+        <div>
+            <label>
+        Product Id:
+        <input formControlName="product_id" [(ngModel)]="product_id" [ngClass]="{ 'ng-invalid ng-touched': inventoryFormControl.product_id.errors && inventorySubmit }">
+      </label>
+            <div *ngIf="(inventoryFormControl.product_id.touched || inventorySubmit)  && inventoryFormControl.product_id.errors">
+                <div *ngIf="inventoryFormControl.product_id.errors.required">
+                    <div class="invalid-alert"> Product Id Required
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br>
+
+        <div>
+            <label>
+        Product Name:
+        <input formControlName="Name" [(ngModel)]="Name" [ngClass]="{ 'ng-invalid ng-touched': inventoryFormControl.Name.errors && inventorySubmit }">
+      </label>
+            <div *ngIf="(inventoryFormControl.Name.touched ||  inventorySubmit)  && inventoryFormControl.Name.errors">
+                <div *ngIf="inventoryFormControl.Name.errors.required">
+                    <div class="invalid-alert"> Product Name Required
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br>
+
+        <div>
+            <label>
+        Product Description:
+        <input formControlName="description" [(ngModel)]="description" [ngClass]="{ 'ng-invalid ng-touched': inventoryFormControl.description.errors &&  inventorySubmit}">
+      </label>
+            <div *ngIf="(inventoryFormControl.description.touched ||  inventorySubmit)  && inventoryFormControl.description.errors">
+                <div *ngIf="inventoryFormControl.description.errors.required">
+                    <div class="invalid-alert"> Product Description Required
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br>
+
+        <div>
+            <label>
+        Product Category:
+        <input formControlName="product_category" [(ngModel)]="category" [ngClass]="{ 'ng-invalid ng-touched': inventoryFormControl.product_category.errors &&  inventorySubmit}">
+      </label>
+            <div *ngIf="(inventoryFormControl.product_category.touched || inventorySubmit)  && inventoryFormControl.product_category.errors">
+                <div *ngIf="inventoryFormControl.product_category.errors.required">
+                    <div class="invalid-alert"> Product Category Required.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br>
+
+        <div>
+            <label>
+        Product Quantity:
+        <input formControlName="quantity" [(ngModel)]="quantity" [ngClass]="{ 'ng-invalid ng-touched': inventoryFormControl.quantity.errors &&  inventorySubmit}">
+      </label>
+            <div *ngIf="(inventoryFormControl.quantity.touched || inventorySubmit)  && inventoryFormControl.quantity.errors">
+                <div *ngIf="inventoryFormControl.quantity.errors.required">
+                    <div class="invalid-alert"> Product Quantity Required.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br>
+
+        <div>
+            <label>
+        Product Price:
+        <input formControlName="price" [(ngModel)]="price"
+          [ngClass]="{ 'ng-invalid ng-touched': inventoryFormControl.price.errors && inventorySubmit}">
+      </label>
+
+            <div *ngIf="(inventoryFormControl.price.touched ||  inventorySubmit)  && inventoryFormControl.price.errors">
+                <div *ngIf="inventoryFormControl.price.errors.required">
+                    <div class="invalid-alert"> Product Price Required.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br>
+        <button type="submit" [disabled]="!inventoryForm.valid" (click)="addCommitee()">Send</button>
+    </div>
+</form>
+
+<br>
+<table>
+    <tr>
+        <th>Sr.No</th>
+        <th>Supplier</th>
+        <th>Product Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+
+    <tr *ngFor="let item of result_array; let myIndex = index">
+        <td>
+            {{item.id}}
+        </td>
+        <td>
+            {{item.Supplier}}
+        </td>
+        <td>
+            {{item.product_id}}
+        </td>
+        <td>
+            {{item.Name}}
+        </td>
+        <td>
+            {{item.description}}
+        </td>
+        <td>
+            {{item.category}}
+        </td>
+        <td>
+            {{item.quantity}}
+        </td>
+
+        <td>
+            {{item.price}}
+        </td>
+
+        <td>
+            <i class="fa fa-edit" style="cursor: pointer" (click)="onEdit(myIndex)"></i>
+        </td>
+        <td>
+            <i class="fa fa-trash" style="cursor: pointer;" (click)="onDelete(myIndex)"></i>
+        </td>
+    </tr>
+
+</table>
